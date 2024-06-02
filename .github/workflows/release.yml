@@ -67,9 +67,9 @@ jobs:
 
       - name: Release package
         run: |
-          npm run publish:win:7z:x64
-          npm run publish:win:7z:arm64
-          npm run publish:win:setup:arm64
+          # npm run publish:win:7z:x64
+          # npm run publish:win:7z:arm64
+          # npm run publish:win:setup:arm64
           npm run publish:win:setup:x64
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -78,7 +78,7 @@ jobs:
       - name: Generate file MD5
         run: |
           cd build
-          Get-FileHash *.exe,*.7z -Algorithm MD5 | Format-List
+          Get-FileHash *.exe -Algorithm MD5 | Format-List
 
 
   Windows_7:
@@ -196,11 +196,11 @@ jobs:
       - name: Release package
         run: |
           npm run publish:linux:deb:amd64
-          npm run publish:linux:deb:arm64
-          npm run publish:linux:deb:armv7l
-          npm run publish:linux:appImage
-          npm run publish:linux:rpm
-          npm run publish:linux:pacman
+          # npm run publish:linux:deb:arm64
+          # npm run publish:linux:deb:armv7l
+          # npm run publish:linux:appImage
+          # npm run publish:linux:rpm
+          # npm run publish:linux:pacman
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BT_TOKEN: ${{ secrets.BT_TOKEN }}
@@ -208,4 +208,4 @@ jobs:
       - name: Generate file MD5
         run: |
           cd build
-          md5sum *.deb *.rpm *.pacman *.AppImage
+          md5sum *.deb
