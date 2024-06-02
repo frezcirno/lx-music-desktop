@@ -60,9 +60,9 @@ jobs:
 
       - name: Release package
         run: |
-          npm run publish:win:7z:x64
-          npm run publish:win:7z:arm64
-          npm run publish:win:setup:arm64
+          # npm run publish:win:7z:x64
+          # npm run publish:win:7z:arm64
+          # npm run publish:win:setup:arm64
           npm run publish:win:setup:x64
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -71,83 +71,83 @@ jobs:
       - name: Generate file MD5
         run: |
           cd build
-          Get-FileHash *.exe,*.7z -Algorithm MD5 | Format-List
+          Get-FileHash *.exe -Algorithm MD5 | Format-List
 
 
-  Windows_7:
-    name: Windows_7
-    runs-on: windows-latest
-    env:
-      NPM_CACHE: '%LocalAppData%/npm-cache'
-    # needs: CheckCode
-    steps:
-      - name: Check out git repository
-        uses: actions/checkout@v4
+  # Windows_7:
+  #   name: Windows_7
+  #   runs-on: windows-latest
+  #   env:
+  #     NPM_CACHE: '%LocalAppData%/npm-cache'
+  #   # needs: CheckCode
+  #   steps:
+  #     - name: Check out git repository
+  #       uses: actions/checkout@v4
 
-      - name: Setup Node Env
-        uses: ./.github/actions/setup
+  #     - name: Setup Node Env
+  #       uses: ./.github/actions/setup
 
-      - name: Build src code
-        run: |
-          git status --porcelain
-          npm run build
+  #     - name: Build src code
+  #       run: |
+  #         git status --porcelain
+  #         npm run build
 
-      - name: Prepare win7 electron env
-        run: |
-          npm install electron@22
-          pip.exe install setuptools
+  #     - name: Prepare win7 electron env
+  #       run: |
+  #         npm install electron@22
+  #         pip.exe install setuptools
 
-      - name: Release win7 package
-        run: |
-          npm run publish:win7:setup:x64
-          npm run publish:win7:7z:x64
-          npm run publish:win7:7z:x86
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BT_TOKEN: ${{ secrets.BT_TOKEN }}
+  #     - name: Release win7 package
+  #       run: |
+  #         npm run publish:win7:setup:x64
+  #         npm run publish:win7:7z:x64
+  #         npm run publish:win7:7z:x86
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #         BT_TOKEN: ${{ secrets.BT_TOKEN }}
 
-      - name: Generate file MD5
-        run: |
-          cd build
-          Get-FileHash *.exe,*.7z -Algorithm MD5 | Format-List
+  #     - name: Generate file MD5
+  #       run: |
+  #         cd build
+  #         Get-FileHash *.exe,*.7z -Algorithm MD5 | Format-List
 
-  Mac:
-    name: Mac
-    runs-on: macos-latest
-    env:
-      NPM_CACHE: ~/.npm
-    # needs: CheckCode
-    steps:
-      - name: Check out git repository
-        uses: actions/checkout@v4
+  # Mac:
+  #   name: Mac
+  #   runs-on: macos-latest
+  #   env:
+  #     NPM_CACHE: ~/.npm
+  #   # needs: CheckCode
+  #   steps:
+  #     - name: Check out git repository
+  #       uses: actions/checkout@v4
 
-      - name: Install python3 setuptools
-        run: |
-          mkdir ~/.venv
-          python3 -m venv ~/.venv
-          source ~/.venv/bin/activate
-          python3 -m pip install setuptools
+  #     - name: Install python3 setuptools
+  #       run: |
+  #         mkdir ~/.venv
+  #         python3 -m venv ~/.venv
+  #         source ~/.venv/bin/activate
+  #         python3 -m pip install setuptools
 
-      - name: Setup Node Env
-        uses: ./.github/actions/setup
+  #     - name: Setup Node Env
+  #       uses: ./.github/actions/setup
 
-      - name: Build src code
-        run: |
-          git status --porcelain
-          npm run build
+  #     - name: Build src code
+  #       run: |
+  #         git status --porcelain
+  #         npm run build
 
-      - name: Release package
-        run: |
-          npm run publish:mac:dmg
-          npm run publish:mac:dmg:arm64
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BT_TOKEN: ${{ secrets.BT_TOKEN }}
+  #     - name: Release package
+  #       run: |
+  #         npm run publish:mac:dmg
+  #         npm run publish:mac:dmg:arm64
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #         BT_TOKEN: ${{ secrets.BT_TOKEN }}
 
-      - name: Generate file MD5
-        run: |
-          cd build
-          md5 *.dmg
+  #     - name: Generate file MD5
+  #       run: |
+  #         cd build
+  #         md5 *.dmg
 
   Linux:
     name: Linux
@@ -173,11 +173,11 @@ jobs:
       - name: Release package
         run: |
           npm run publish:linux:deb:amd64
-          npm run publish:linux:deb:arm64
-          npm run publish:linux:deb:armv7l
-          npm run publish:linux:appImage
-          npm run publish:linux:rpm
-          npm run publish:linux:pacman
+          # npm run publish:linux:deb:arm64
+          # npm run publish:linux:deb:armv7l
+          # npm run publish:linux:appImage
+          # npm run publish:linux:rpm
+          # npm run publish:linux:pacman
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BT_TOKEN: ${{ secrets.BT_TOKEN }}
@@ -185,4 +185,4 @@ jobs:
       - name: Generate file MD5
         run: |
           cd build
-          md5sum *.deb *.rpm *.pacman *.AppImage
+          md5sum *.deb
