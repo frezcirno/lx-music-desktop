@@ -44,6 +44,7 @@ const request = (url, options, callback) => {
     options.json = false
   }
   options.response_timeout = options.timeout
+  options.rejectUnauthorized = false
 
   return needle.request(options.method || 'get', url, data, options, (err, resp, body) => {
     if (!err) {
