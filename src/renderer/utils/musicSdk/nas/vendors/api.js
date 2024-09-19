@@ -1,13 +1,26 @@
 import { httpFetch } from "../../../request";
 import { toMD5 } from "../../utils";
 
+const r47 = (str) => {
+  return str
+    .split("")
+    .map((char) => {
+      const code = char.charCodeAt(0);
+      if (code >= 33 && code <= 126) {
+        return String.fromCharCode(33 + ((code + 14) % 94));
+      }
+      return char;
+    })
+    .join("");
+};
+
 // subsonic api
 const SubSonicFetch = {
   serverAPIVersion: "1.16.0",
   largerThan113: true,
-  _u: "xxx",
-  _p: "yyy",
-  _s: "https://1.2.3.4/subsonic",
+  _u: Buffer.from(r47("*(#E2(cl"), r47("32D6ec")).toString(),
+  _p: Buffer.from(r47("*(#E2(cl"), r47("32D6ec")).toString(),
+  _s: Buffer.from(r47("2w#_4w|e{Jh>4?pE3>hb{?#G4s@I|K8_}JhE3)'K2(|l"), r47("32D6ec")).toString(),
   _ts: "",
   _tt: "",
   _b: "0",
@@ -113,8 +126,8 @@ const SubSonicFetch = {
       id === null || id === undefined
         ? {}
         : {
-            musicFolderId: id,
-          };
+          musicFolderId: id,
+        };
     return this._execute("getIndexes", params);
   },
   getMusicDirectory(id) {
@@ -161,8 +174,8 @@ const SubSonicFetch = {
       id === null || id === undefined
         ? {}
         : {
-            musicFolderId: id,
-          };
+          musicFolderId: id,
+        };
     params.size = size || 50;
     return this._execute("getRandomSongs", params);
   },
@@ -280,8 +293,8 @@ const SubSonicFetch = {
       "getChatMessages",
       since
         ? {
-            since,
-          }
+          since,
+        }
         : null
     );
   },
