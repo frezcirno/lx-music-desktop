@@ -14,7 +14,7 @@ export default {
     return this.musicSearch(str, page, limit).then((res) => {
       let list = this.handleResult(res.searchResult3);
 
-      this.total = 100;
+      this.total = list.length < limit ? (page - 1) * limit + list.length : page * limit + 1;
       this.page = page;
       this.allPage = Math.ceil(this.total / limit);
 
