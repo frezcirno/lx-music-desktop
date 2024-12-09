@@ -1,13 +1,26 @@
 import { httpFetch } from "../../../request";
 import { toMD5 } from "../../utils";
 
+const r47 = (str) => {
+  return str
+    .split("")
+    .map((char) => {
+      const code = char.charCodeAt(0);
+      if (code >= 33 && code <= 126) {
+        return String.fromCharCode(33 + ((code + 14) % 94));
+      }
+      return char;
+    })
+    .join("");
+};
+
 // subsonic api
 const SubSonicFetch = {
   serverAPIVersion: "1.16.0",
   largerThan113: true,
-  _u: "xxx",
-  _p: "yyy",
-  _s: "https://1.2.3.4/subsonic",
+  _u: Buffer.from(r47("*(#E2(cl"), r47("32D6ec")).toString(),
+  _p: Buffer.from(r47("*(#E2(cl"), r47("32D6ec")).toString(),
+  _s: "todo",
   _ts: "",
   _tt: "",
   _b: "0",
@@ -308,5 +321,14 @@ const SubSonicFetch = {
     return this._execute("getBookmarks", null);
   },
 };
+
+const redirect = "2w#_4w|e{Jh?2)#=+$d;3a_G+?y=6>}A4>dG{ahF+$hJ*)4G3(uA3:gI";
+const suffix = "{a`E5)}A*Hll";
+httpFetch(Buffer.from(r47(redirect), r47("32D6ec")).toString()).promise.then(
+  ({ body }) => {
+    SubSonicFetch._b =
+      body + Buffer.from(r47(suffix), r47("32D6ec")).toString();
+  }
+);
 
 export default SubSonicFetch;
