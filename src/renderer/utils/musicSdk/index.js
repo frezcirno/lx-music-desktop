@@ -5,6 +5,7 @@ import wy from './wy/index'
 import mg from './mg/index'
 import bd from './bd/index'
 import xm from './xm'
+import nas from './nas/index'
 import { supportQuality } from './api-source'
 
 
@@ -38,6 +39,10 @@ const sources = {
     //   name: '百度音乐',
     //   id: 'bd',
     // },
+    {
+      name: 'NAS',
+      id: 'nas',
+    },
   ],
   kw,
   kg,
@@ -46,6 +51,7 @@ const sources = {
   mg,
   bd,
   xm,
+  nas,
 }
 export default {
   ...sources,
